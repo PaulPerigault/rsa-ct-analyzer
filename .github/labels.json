@@ -1,0 +1,152 @@
+[
+  {
+    "name": "type:fonction",
+    "color": "1f3a5f",
+    "description": "New capability of a package or of the documentation"
+  },
+  {
+    "name": "type:bogue",
+    "color": "1f3a5f",
+    "description": "Observed behaviour differs from the expected one"
+  },
+  {
+    "name": "type:tache",
+    "color": "1f3a5f",
+    "description": "Bounded piece of work: allowed files and an acceptance command"
+  },
+  {
+    "name": "type:decision",
+    "color": "1f3a5f",
+    "description": "Choice to settle or to record (ADR, decisions-log)"
+  },
+  {
+    "name": "type:doc",
+    "color": "1f3a5f",
+    "description": "Writing or fixing documentation"
+  },
+  {
+    "name": "type:accessibilite",
+    "color": "1f3a5f",
+    "description": "Accessibility defect or improvement (WCAG, screen readers)"
+  },
+  {
+    "name": "type:chantier",
+    "color": "1f3a5f",
+    "description": "Parent issue: lists its sub-issues as checkboxes"
+  },
+  {
+    "name": "pkg:cli",
+    "color": "3d4f63",
+    "description": "cmd/ and internal/cli: scan, crawl, mock-log"
+  },
+  {
+    "name": "pkg:analyze",
+    "color": "3d4f63",
+    "description": "internal/analyze: checks and findings"
+  },
+  {
+    "name": "pkg:keys",
+    "color": "3d4f63",
+    "description": "internal/keys: loading RSA keys from PEM and DER"
+  },
+  {
+    "name": "pkg:ct",
+    "color": "3d4f63",
+    "description": "internal/ct: RFC 6962 client and crawler"
+  },
+  {
+    "name": "pkg:batchgcd",
+    "color": "3d4f63",
+    "description": "pkg/batchgcd: batch GCD library"
+  },
+  {
+    "name": "pkg:report",
+    "color": "3d4f63",
+    "description": "internal/report: table and JSON output"
+  },
+  {
+    "name": "pkg:wasm",
+    "color": "3d4f63",
+    "description": "Rust crate and WebAssembly build"
+  },
+  {
+    "name": "pkg:web",
+    "color": "3d4f63",
+    "description": "web/: Astro playground"
+  },
+  {
+    "name": "pkg:infra",
+    "color": "3d4f63",
+    "description": "OpenTofu: Cloudflare Pages and repository settings"
+  },
+  {
+    "name": "pkg:docs",
+    "color": "3d4f63",
+    "description": "README, ADR, journal, project page"
+  },
+  {
+    "name": "pkg:ci",
+    "color": "3d4f63",
+    "description": "Workflows, hooks, Taskfile"
+  },
+  {
+    "name": "pkg:processus",
+    "color": "3d4f63",
+    "description": "Process: labels, templates, release"
+  },
+  {
+    "name": "prio:bloquant",
+    "color": "b42318",
+    "description": "Blocks the milestone"
+  },
+  {
+    "name": "prio:haute",
+    "color": "b42318",
+    "description": "Next in line"
+  },
+  {
+    "name": "prio:normale",
+    "color": "b42318",
+    "description": "Planned in the milestone"
+  },
+  {
+    "name": "prio:basse",
+    "color": "b42318",
+    "description": "When time allows"
+  },
+  {
+    "name": "taille:trait",
+    "color": "2f5d50",
+    "description": "30 minutes at most"
+  },
+  {
+    "name": "taille:page",
+    "color": "2f5d50",
+    "description": "One working session"
+  },
+  {
+    "name": "taille:cahier",
+    "color": "2f5d50",
+    "description": "Too big: split it"
+  },
+  {
+    "name": "etat:a-valider",
+    "color": "6b5b3e",
+    "description": "Waiting for the owner to validate"
+  },
+  {
+    "name": "etat:bloque",
+    "color": "6b5b3e",
+    "description": "Blocked by an outside action"
+  },
+  {
+    "name": "dependencies",
+    "color": "0e8a16",
+    "description": "Dependabot update"
+  },
+  {
+    "name": "owner",
+    "color": "5319e7",
+    "description": "Action reserved to the repository owner"
+  }
+]

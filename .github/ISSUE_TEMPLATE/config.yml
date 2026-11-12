@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a vulnerability (private)
+    url: https://github.com/PaulPerigault/rsa-ct-analyzer/security/advisories/new
+    about: Never publish a vulnerability in an issue. Use private vulnerability reporting.
+  - name: Author's site
+    url: https://paulperigault.fr
+    about: Portfolio of the author.

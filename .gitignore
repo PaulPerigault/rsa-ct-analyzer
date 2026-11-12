@@ -1,0 +1,37 @@
+# Build output
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+coverage.*
+
+# Local configuration and secrets: only *.example files are committed
+.env
+.env.*
+!.env.example
+*.pem.key
+*.tfstate*
+
+# Analysis artifacts produced by the tool
+/crawled*.pem
+/report.json
+/reports/
+/data/
+/results/
+
+# Editors, OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Claude Code: personal settings and worktrees
+/.claude/settings.local.json
+/.claude/worktrees/
+/tmp/
+.tools/
+
+# vendored skills are tracked as they are
+!.claude/skills/**/coverage.*

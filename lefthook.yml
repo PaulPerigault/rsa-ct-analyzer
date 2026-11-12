@@ -1,0 +1,25 @@
+# Git hooks. Installed by `task setup` with the pinned Lefthook (tools/go.mod).
+# Hooks call only pinned tools: `go tool -modfile=tools/go.mod ...`.
+output: [failure, summary]
+
+pre-commit:
+  parallel: false
+  commands:
+    secrets:
+      run: go tool -modfile=tools/go.mod gitleaks git --pre-commit --staged --redact --no-banner
+    format:
+      glob: '*.go'
+      run: test -z "$(gofmt -s -l {staged_files})" || { gofmt -s -l {staged_files}; echo "run task fmt"; exit 1; }
+    lint:
+      glob: '*.go'
+      run: go tool -modfile=tools/go.mod golangci-lint run ./...
+
+commit-msg:
+  commands:
+    conventional-commits:
+      run: go run ./dev/commitlint {1}
+
+pre-push:
+  commands:
+    verify:
+      run: go tool -modfile=tools/go.mod task verify

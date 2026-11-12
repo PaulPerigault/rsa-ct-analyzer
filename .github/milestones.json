@@ -1,0 +1,14 @@
+[
+  {
+    "title": "v0.1.0 Initial public release",
+    "description": "Go CLI (scan, crawl, mock-log), pure-Go batch GCD, CI, security tooling, documentation. No open issue: everything is in the initial commit."
+  },
+  {
+    "title": "v0.2.0 Web playground (Rust/WASM + Astro)",
+    "description": "Rust crate compiled to WebAssembly, conformance tests against the Go implementation on golden files, Astro playground on @paulperigault/design-system tokens, Cloudflare Pages in OpenTofu, project page on the portfolio."
+  },
+  {
+    "title": "v0.3.0 Real CT logs & hardening",
+    "description": "Resumable crawl of a real CT log with bounded rate, versioned JSON Schema for the report, benchmarks, tree-head verification decision."
+  }
+]

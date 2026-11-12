@@ -1,0 +1,84 @@
+name: Task
+description: A bounded piece of work with an acceptance command.
+title: 'chore: '
+labels: ['type:tache']
+assignees: [PaulPerigault]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One issue per step. If it does not fit one working session, open a parent
+        "Chantier" issue and split it. Never report a vulnerability here: see SECURITY.md.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: The observed need or defect, with a source or an example. Facts, not intentions.
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What a user or a maintainer can do once this is closed, in two or three sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance criteria
+      description: Each box is checked by a command, a test or a capture.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options: [cli, analyze, keys, ct, batchgcd, report, wasm, web, infra, docs, ci, processus]
+    validations:
+      required: true
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      description: trait = 30 minutes at most; page = one session; cahier = split it.
+      options: [trait, page, cahier]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options: [bloquant, haute, normale, basse]
+    validations:
+      required: true
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Milestone to attach
+      description: Not settable from the form; the owner or Claude Code sets it.
+      options:
+        - v0.1.0 Initial public release
+        - v0.2.0 Web playground (Rust/WASM + Astro)
+        - v0.3.0 Real CT logs & hardening
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: What this issue does not cover.
+  - type: checkboxes
+    id: done
+    attributes:
+      label: Definition of done
+      options:
+        - label: Tests added, `task verify` green.
+          required: true
+        - label: Documentation up to date (README, ADR or journal).
+          required: true
+        - label: PR linked with `Closes #n`.
+          required: true

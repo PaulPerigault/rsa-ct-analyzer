@@ -1,0 +1,183 @@
+# https://taskfile.dev — single entry point. `task` lists the targets.
+# Dev tools are pinned in tools/go.mod (hashes in tools/go.sum): nothing is
+# downloaded unverified. Install Task once: `go install github.com/go-task/task/v3/cmd/task@latest`
+# or use the pinned copy: `go tool -modfile=tools/go.mod task <target>`.
+version: '3'
+
+vars:
+  BINARY: rsa-ct-analyzer
+  PKG: github.com/PaulPerigault/rsa-ct-analyzer
+  EXE: '{{if eq OS "windows"}}.exe{{end}}'
+  TOOL: go tool -modfile=tools/go.mod
+  VERSION:
+    sh: git describe --tags --always --dirty 2>/dev/null || echo dev
+  COMMIT:
+    sh: git rev-parse --short HEAD 2>/dev/null || echo none
+  DATE: '{{dateInZone "2006-01-02T15:04:05Z" now "UTC"}}'
+  LDFLAGS: >-
+    -s -w
+    -X {{.PKG}}/internal/version.Version={{.VERSION}}
+    -X {{.PKG}}/internal/version.Commit={{.COMMIT}}
+    -X {{.PKG}}/internal/version.Date={{.DATE}}
+  PLATFORMS: linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64
+
+dotenv: ['.env']
+
+tasks:
+  default:
+    desc: List the targets
+    silent: true
+    cmds:
+      - task --list || go tool -modfile=tools/go.mod task --list
+
+  setup:
+    desc: Download modules, create .env, verify pinned tools, install Git hooks (Lefthook)
+    cmds:
+      - go mod download
+      - go mod verify
+      - go -C tools mod download
+      - go -C tools mod verify
+      - test -f .env || cp .env.example .env
+      - go build -modfile=tools/go.mod -o .tools/bin/lefthook{{.EXE}} github.com/evilmartians/lefthook
+      - '{{.TOOL}} lefthook install'
+      - task: hooks:pin
+
+  hooks:pin:
+    desc: Make the Git hooks run the pinned Lefthook (tools/go.sum), not whatever is in PATH
+    cmds:
+      - |
+        for h in "$(git rev-parse --git-path hooks)"/*; do
+          grep -q 'call_lefthook run' "$h" 2>/dev/null || continue
+          grep -q 'LEFTHOOK_BIN=' "$h" && continue
+          sed -i 's|^call_lefthook run|LEFTHOOK_BIN="$(git rev-parse --show-toplevel)/.tools/bin/lefthook{{.EXE}}"; export LEFTHOOK_BIN\ncall_lefthook run|' "$h"
+        done
+
+  dev:
+    desc: Scan the sample data without building (fast feedback loop)
+    cmds:
+      - go run ./cmd/{{.BINARY}} scan testdata
+
+  run:
+    desc: 'Run the binary, e.g. task run -- scan --format json testdata/certs'
+    deps: [build]
+    cmds:
+      - ./bin/{{.BINARY}}{{.EXE}} {{.CLI_ARGS}}
+
+  verify:
+    desc: Everything CI runs, locally (pre-push hook and CI job)
+    cmds:
+      - task: fmt:check
+      - task: lint
+      - task: test
+      - task: check:docs
+      - task: data:check
+      - task: skills:verify
+      - task: security
+
+  test:
+    desc: Unit and integration tests with the race detector
+    cmds:
+      - go test -race -count=1 -cover ./...
+
+  lint:
+    desc: go vet and golangci-lint (depguard, funlen, gocyclo...)
+    cmds:
+      - go vet ./...
+      - '{{.TOOL}} golangci-lint run ./...'
+
+  fmt:
+    desc: Format the Go code
+    cmds:
+      - gofmt -s -w .
+
+  fmt:check:
+    desc: Fail if a Go file is not formatted
+    cmds:
+      - cmd: test -z "$(gofmt -s -l .)" || { gofmt -s -l .; echo "run task fmt"; exit 1; }
+
+  build:
+    desc: Build bin/rsa-ct-analyzer (pure Go, CGO off)
+    env:
+      CGO_ENABLED: '0'
+    cmds:
+      - go build -trimpath -ldflags "{{.LDFLAGS}}" -o bin/{{.BINARY}}{{.EXE}} ./cmd/{{.BINARY}}
+
+  build:all:
+    desc: Cross-compile five platforms into dist/ with SHA256SUMS
+    env:
+      CGO_ENABLED: '0'
+    cmds:
+      - for: {var: PLATFORMS, split: ' '}
+        cmd: >-
+          GOOS={{index (splitList "/" .ITEM) 0}} GOARCH={{index (splitList "/" .ITEM) 1}}
+          go build -trimpath -ldflags "{{.LDFLAGS}}"
+          -o dist/{{.BINARY}}-{{index (splitList "/" .ITEM) 0}}-{{index (splitList "/" .ITEM) 1}}{{if eq (index (splitList "/" .ITEM) 0) "windows"}}.exe{{end}}
+          ./cmd/{{.BINARY}}
+      - cmd: cd dist && sha256sum {{.BINARY}}-* > SHA256SUMS
+        platforms: [linux, darwin, windows]
+
+  demo:
+    desc: Offline pipeline, simulated CT log to crawl to scan (needs a POSIX sh)
+    deps: [build]
+    cmds:
+      - BIN=./bin/{{.BINARY}}{{.EXE}} sh scripts/demo.sh
+
+  security:
+    desc: govulncheck on code and dependencies, gitleaks on the tree and the Git history
+    cmds:
+      - '{{.TOOL}} govulncheck ./...'
+      - '{{.TOOL}} gitleaks dir . --redact --no-banner'
+      - cmd: '{{.TOOL}} gitleaks git . --redact --no-banner'
+        ignore_error: false
+
+  check:docs:
+    desc: Fail if the docs mention a task, command, flag or path that no longer exists, or if the README output drifted
+    cmds:
+      - go run ./dev/checkdocs
+      - go run ./dev/readme-gen -check
+
+  skills:verify:
+    desc: Project skills match .claude/skills.lock.json; at most 12 auto-triggered
+    cmds:
+      - go run ./dev/skillscheck
+
+  docs:readme:
+    desc: Regenerate the sample output of README.md from the real CLI
+    cmds:
+      - go run ./dev/readme-gen
+
+  data:gen:
+    desc: Regenerate testdata/ from the fixed seed (deterministic)
+    cmds:
+      - go run ./dev/gen-testdata -out testdata
+
+  data:check:
+    desc: Fail if testdata/ differs from what the generator produces
+    vars:
+      TMP: '{{.TASKFILE_DIR}}/.tools/testdata-check'
+    cmds:
+      - go run ./dev/gen-testdata -out {{.TMP}}
+      - diff -r testdata/certs {{.TMP}}/certs
+      - diff -r testdata/keys {{.TMP}}/keys
+
+  docker:build:
+    desc: Build the container image (distroless, non-root)
+    cmds:
+      - >-
+        docker build -t {{.BINARY}}:{{.VERSION}} -t {{.BINARY}}:local
+        --build-arg VERSION={{.VERSION}} --build-arg COMMIT={{.COMMIT}} .
+
+  docker:scan:
+    desc: Scan the image with Trivy (HIGH and CRITICAL fail)
+    deps: [docker:build]
+    cmds:
+      - mkdir -p .tools
+      - docker save {{.BINARY}}:local -o .tools/image.tar
+      - >-
+        docker run --rm -v "{{.TASKFILE_DIR}}/.tools:/in" aquasec/trivy:latest
+        image --input /in/image.tar --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1
+
+  clean:
+    desc: Remove build output and generated reports
+    cmds:
+      - rm -rf bin dist .tools coverage.* crawled*.pem report.json

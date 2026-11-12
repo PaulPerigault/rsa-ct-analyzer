@@ -1,0 +1,13 @@
+# Extends the default ruleset. Only the vendored, audited skill text and its lock (hashes look like keys) are
+# allowlisted; everything else, including the whole Git history, is scanned.
+title = "rsa-ct-analyzer gitleaks"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "vendored third-party skills (audited, never edited) and their lock file of SHA-256 hashes"
+paths = [
+  '''^\.claude/skills/''',
+  '''^\.claude/skills\.lock\.json$''',
+]

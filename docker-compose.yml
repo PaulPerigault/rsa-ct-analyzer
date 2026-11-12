@@ -1,0 +1,53 @@
+# Offline demo of the whole pipeline: simulated CT log -> crawl -> scan.
+#   docker compose up --build --abort-on-container-exit --exit-code-from scan
+# `scan` exits 2 on the sample data: it contains deliberately weak keys.
+name: rsa-ct-analyzer
+
+services:
+  mock-log:
+    build: .
+    command: ["mock-log", "--addr", "0.0.0.0:8080", "--precert-every", "4", "/data"]
+    volumes:
+      - ./testdata/certs:/data:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks: [internal]
+
+  crawl:
+    build: .
+    command:
+      - crawl
+      - --log-url=http://mock-log:8080
+      - --start=0
+      - --count=100
+      - --rate-limit=0
+      - --retries=10
+      - --out=/work/crawled.pem
+    depends_on: [mock-log]
+    volumes:
+      - work:/work
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks: [internal]
+
+  scan:
+    build: .
+    command: ["scan", "--fail-on", "critical", "/work/crawled.pem"]
+    depends_on:
+      crawl:
+        condition: service_completed_successfully
+    volumes:
+      - work:/work:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    network_mode: none
+
+volumes:
+  work:
+
+networks:
+  internal:
+    internal: true

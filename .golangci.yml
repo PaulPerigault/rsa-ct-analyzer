@@ -1,0 +1,144 @@
+# golangci-lint v2 — https://golangci-lint.run/usage/configuration/
+# Limits mirror AGENTS.md: function <= 40 lines, gocyclo <= 15, <= 4 parameters,
+# nesting <= 3, and the package dependency direction (depguard).
+version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - gosec
+    - revive
+    - gocyclo
+    - funlen
+    - depguard
+    - misspell
+    - unconvert
+    - bodyclose
+    - errorlint
+    - nilerr
+    - predeclared
+    - usestdlibvars
+  settings:
+    gocyclo:
+      min-complexity: 15
+    funlen:
+      lines: 40
+      statements: -1
+    errcheck:
+      exclude-functions:
+        - fmt.Fprint
+        - fmt.Fprintf
+        - fmt.Fprintln
+    revive:
+      rules:
+        - name: exported
+        - name: package-comments
+        - name: error-return
+        - name: error-naming
+        - name: var-naming
+        - name: indent-error-flow
+        - name: unused-parameter
+        - name: argument-limit
+          arguments: [4]
+        - name: max-control-nesting
+          arguments: [3]
+    gosec:
+      excludes:
+        - G115 # integer conversions are bounded by the surrounding checks
+    depguard:
+      rules:
+        # Dependency direction, see the table in AGENTS.md. Tests are not restricted.
+        batchgcd:
+          list-mode: lax
+          files: ["**/pkg/batchgcd/**", "!**/*_test.go"]
+          deny:
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal
+              desc: pkg/batchgcd is public and depends on the standard library only
+            - pkg: github.com/spf13/cobra
+              desc: no CLI framework in a library
+            - pkg: net/http
+              desc: pure computation, no network
+            - pkg: os
+              desc: pure computation, no filesystem
+        keys:
+          list-mode: lax
+          files: ["**/internal/keys/**", "!**/*_test.go"]
+          deny:
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal
+              desc: keys is a leaf package
+            - pkg: net/http
+              desc: keys never touches the network
+        ct:
+          list-mode: lax
+          files: ["**/internal/ct/**", "!**/*_test.go"]
+          deny:
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/cli
+              desc: ct must not depend on the CLI
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/analyze
+              desc: ct only produces certificates
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/report
+              desc: ct only produces certificates
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/keys
+              desc: ct and keys are independent bricks
+        analyze:
+          list-mode: lax
+          files: ["**/internal/analyze/**", "!**/*_test.go"]
+          deny:
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/cli
+              desc: analyze must not depend on the CLI
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/ct
+              desc: analyze never touches the network
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/report
+              desc: rendering depends on analyze, not the reverse
+            - pkg: github.com/spf13/cobra
+              desc: no CLI framework in the analysis
+            - pkg: net/http
+              desc: analyze receives keys already loaded
+            - pkg: os
+              desc: analyze never reads the filesystem
+        report:
+          list-mode: lax
+          files: ["**/internal/report/**", "!**/*_test.go"]
+          deny:
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/cli
+              desc: report must not depend on the CLI
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/ct
+              desc: report renders analyze results only
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/keys
+              desc: report renders analyze results only
+        cmd:
+          list-mode: lax
+          files: ["**/cmd/**"]
+          deny:
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/analyze
+              desc: cmd only wires internal/cli
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/keys
+              desc: cmd only wires internal/cli
+            - pkg: github.com/PaulPerigault/rsa-ct-analyzer/internal/ct
+              desc: cmd only wires internal/cli
+  exclusions:
+    paths:
+      - testdata
+    rules:
+      - path: _test\.go
+        linters: [gosec, gocyclo, funlen, revive]
+      - path: dev/
+        linters: [gosec, funlen]
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/PaulPerigault/rsa-ct-analyzer

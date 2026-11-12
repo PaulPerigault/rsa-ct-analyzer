@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "auditDate": "2026-11-12",
+  "profiles": [
+    "core",
+    "go",
+    "docs"
+  ],
+  "skills": {
+    "conventional-git": {
+      "origine": "tiers",
+      "source": "samber/cc-skills",
+      "url": "https://github.com/samber/cc-skills",
+      "path": "skills/conventional-git",
+      "sha": "50a33836b20f690c668af557bd9ef9d07a8c7ef2",
+      "licence": "MIT",
+      "licenceFile": "_licenses/samber/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "core"
+      ],
+      "files": {
+        "SKILL.md": "89790641e8b48c9ad7993c1a6a3bb6d2de94df4d30df81186e251c8f3502145d",
+        "evals/evals.json": "683d191ecb64e50eee4e732e5f8f73a795b76ac04f04c82773548eb4bf70900f"
+      },
+      "treeSha256": "4e2536c39273a4e87276fa236803776c28a77db6bad53c4c92ac710af6664087",
+      "notes": "Forbids any AI signature or Co-authored-by trailer (consistent with CLAUDE.md rule 2). allowed-tools includes Bash(gh:*): settings deny rules (gh writes) win. Worktree dir .claude/worktrees is a local convention."
+    },
+    "copy-editing": {
+      "origine": "tiers",
+      "source": "coreyhaines31/marketingskills",
+      "url": "https://github.com/coreyhaines31/marketingskills",
+      "path": "skills/copy-editing",
+      "sha": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "licence": "MIT",
+      "licenceFile": "_licenses/marketing/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "manual",
+      "audit_level": "full-read",
+      "profils": [
+        "copy-fr-en",
+        "marketing",
+        "docs"
+      ],
+      "files": {
+        "SKILL.md": "cec5a771ce37ade292f7f1f6b418e8a6ce6ec3f50163fa5e664afbcb03e085fc",
+        "evals/evals.json": "cc18c9f51094058759267d465cfcc50da65f248f66b923326781aa642d622ca7",
+        "references/checklist.md": "4cf94c922286223681fc53721fcc65ae7299f1e36e797e7397d369d674580c60",
+        "references/content-refresh.md": "ba73cdf278fe6b552eee27eb1452494f11f9d17ef67d720657e0982f76fb961b",
+        "references/plain-english-alternatives.md": "df4f820d4c63ae8a517c64a243c101658352cd07d002355bf3c97de0a00f3775"
+      },
+      "treeSha256": "e1093d98b14245f7e31891d9ea1fd6d454013f428836df55165a8f314379042e",
+      "notes": "Reads optional .agents/product-marketing.md context file."
+    },
+    "encre-processus": {
+      "origine": "encre",
+      "source": "PaulPerigault/design-system",
+      "url": "https://github.com/PaulPerigault/design-system",
+      "path": ".claude/skills/encre-processus",
+      "sha": "44badf1cdd7536cfc0b98014b6feec78936065af",
+      "licence": "MIT (c) 2026 Paul Perigault",
+      "licenceFile": "_licenses/maison/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "core"
+      ],
+      "files": {
+        "SKILL.md": "c7f030bd332ea20a8fd62c2d84c3d72953c84d71f365a60e025599ca2af5808f"
+      },
+      "treeSha256": "e6b1abbe1bc53814d7ddcd47cbc41b67e16d0f2a623d0f31b2e7eb2aea73d3af",
+      "notes": "Written for the design-system repo: some paths (apps/docs, crates pp-*) are specific to it; the consuming repo's AGENTS.md translates them."
+    },
+    "encre-securite": {
+      "origine": "encre",
+      "source": "PaulPerigault/design-system",
+      "url": "https://github.com/PaulPerigault/design-system",
+      "path": ".claude/skills/encre-securite",
+      "sha": "44badf1cdd7536cfc0b98014b6feec78936065af",
+      "licence": "MIT (c) 2026 Paul Perigault",
+      "licenceFile": "_licenses/maison/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "core"
+      ],
+      "files": {
+        "SKILL.md": "2daf1b82597dd297d24e37200971c9208045b78303db6e353976c20e5d31c380"
+      },
+      "treeSha256": "9f003cc840900c85c239d01c01cdeb9faf08f767b5283e2af0a25c8b37000ba6",
+      "notes": "Written for the design-system repo: some paths (apps/docs, crates pp-*) are specific to it; the consuming repo's AGENTS.md translates them."
+    },
+    "encre-veille": {
+      "origine": "encre",
+      "source": "PaulPerigault/design-system",
+      "url": "https://github.com/PaulPerigault/design-system",
+      "path": ".claude/skills/encre-veille",
+      "sha": "44badf1cdd7536cfc0b98014b6feec78936065af",
+      "licence": "MIT (c) 2026 Paul Perigault",
+      "licenceFile": "_licenses/maison/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "manual",
+      "audit_level": "full-read",
+      "profils": [
+        "core"
+      ],
+      "files": {
+        "PROVENANCE.md": "3d6f651ef01673c229eceeed9d74798df77d9850f9c7504fbf5a7272caf9a53d",
+        "SKILL.md": "f7f99e145ddaae63fc0c78069cff88158361fe0f95edf594b9bbf3389dc0e69c"
+      },
+      "treeSha256": "03388f94a9f404a8e0bc637b8f1724ece8d05852dbf0fd091a984794765a6d92",
+      "notes": "Written for the design-system repo: some paths (apps/docs, crates pp-*) are specific to it; the consuming repo's AGENTS.md translates them."
+    },
+    "encre-voix": {
+      "origine": "encre",
+      "source": "PaulPerigault/design-system",
+      "url": "https://github.com/PaulPerigault/design-system",
+      "path": ".claude/skills/encre-voix",
+      "sha": "44badf1cdd7536cfc0b98014b6feec78936065af",
+      "licence": "MIT (c) 2026 Paul Perigault",
+      "licenceFile": "_licenses/maison/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "copy-fr-en",
+        "docs"
+      ],
+      "files": {
+        "SKILL.md": "2f46e8a90a139e926714e029225ca763d9bad31fb17a21a6f9279fb0b8e0b107"
+      },
+      "treeSha256": "6e6eda66c7a303fb7825678c89de1fa3877fe4af8463c33b9938de5278ef2022",
+      "notes": "Written for the design-system repo: some paths (apps/docs, crates pp-*) are specific to it; the consuming repo's AGENTS.md translates them."
+    },
+    "golang-code-style": {
+      "origine": "tiers",
+      "source": "samber/cc-skills-golang",
+      "url": "https://github.com/samber/cc-skills-golang",
+      "path": "skills/golang-code-style",
+      "sha": "d68d80aec298e1b74b37c2a472c002b5217248b3",
+      "licence": "MIT",
+      "licenceFile": "_licenses/golang/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "go"
+      ],
+      "files": {
+        "SKILL.md": "1c53d6b8405fc2992b92524d4782c826845916d64f90a5af483b9401865b9a76",
+        "evals/evals.json": "a439625516667ab0e60e58003294da3c0cf5a579d1c4741c5b5a57514ec35356",
+        "references/details.md": "3969d18fb54e59c032de0463b44b6b5bd125dfe8b726ef0f009190da81f3df07"
+      },
+      "treeSha256": "e97b554ffd958f1446e944e7e7b27653c38a02bd93b7aea112ee1927c1ffe3d5",
+      "notes": "Install hints use 'go install ...@latest' (metadata and SKILL.md): ignored, repo rules apply (tools/go.mod pinned tools). frontmatter 'paths' and 'allowed-tools' are the skill's own metadata."
+    },
+    "golang-concurrency": {
+      "origine": "tiers",
+      "source": "samber/cc-skills-golang",
+      "url": "https://github.com/samber/cc-skills-golang",
+      "path": "skills/golang-concurrency",
+      "sha": "d68d80aec298e1b74b37c2a472c002b5217248b3",
+      "licence": "MIT",
+      "licenceFile": "_licenses/golang/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "manual",
+      "audit_level": "full-read",
+      "profils": [
+        "go"
+      ],
+      "files": {
+        "SKILL.md": "b56255b765a50c1052c5d71cd60ddb1c2ef643ce3b447aa195ba81f31d10bd1c",
+        "evals/evals.json": "045fcac623f3549608df0409edfd7863e9580249ae447499266e3a3d96798959",
+        "references/channels-and-select.md": "3435dee63817a2829b48fbfbaebe25bbb448008d4d06e0e739c2f070b78328ab",
+        "references/pipelines.md": "c1b3f3dc4273370c61631328de11ec19b2fa1000c22ddff50d06bca059dd5d70",
+        "references/sync-primitives.md": "f54e4343942feef72b2f371e5b67156469f82fd2ea0e4f2634c957530926d6de"
+      },
+      "treeSha256": "4ab04779c54c7a1f00303198fa204a7639c475aa50155d3e1959a927ae5f3732",
+      "notes": "Install hints use 'go install ...@latest' (metadata and SKILL.md): ignored, repo rules apply (tools/go.mod pinned tools). frontmatter 'paths' and 'allowed-tools' are the skill's own metadata."
+    },
+    "golang-context": {
+      "origine": "tiers",
+      "source": "samber/cc-skills-golang",
+      "url": "https://github.com/samber/cc-skills-golang",
+      "path": "skills/golang-context",
+      "sha": "d68d80aec298e1b74b37c2a472c002b5217248b3",
+      "licence": "MIT",
+      "licenceFile": "_licenses/golang/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "manual",
+      "audit_level": "full-read",
+      "profils": [
+        "go"
+      ],
+      "files": {
+        "SKILL.md": "257a3e5a07d686ef617a59bc55e5b320665381e50dbc696d0aacc43aee687da2",
+        "evals/evals.json": "b53b95d0c3a8ade1da1c3ea7f2bec22bfd8da37b61cb77be050100ccba738a89",
+        "references/cancellation.md": "7d99f6982a0e397e42321791e8a39a63058bd0164ee6bd0ef1b4a17510be10c6",
+        "references/http-services.md": "a676622a134b7363ffced7d1e6e0b11acbee0c8e226140d428494b741a3819ab",
+        "references/values-tracing.md": "7ef49277791408380d3b8ad285a81fe7814f5d727c3950abae2958e6dd9058af"
+      },
+      "treeSha256": "4c2bf47f934ba149beeb4ba778b6e2b40bd83d287d7ec27d89d9a26f2c9257ec",
+      "notes": "Install hints use 'go install ...@latest' (metadata and SKILL.md): ignored, repo rules apply (tools/go.mod pinned tools). frontmatter 'paths' and 'allowed-tools' are the skill's own metadata."
+    },
+    "golang-error-handling": {
+      "origine": "tiers",
+      "source": "samber/cc-skills-golang",
+      "url": "https://github.com/samber/cc-skills-golang",
+      "path": "skills/golang-error-handling",
+      "sha": "d68d80aec298e1b74b37c2a472c002b5217248b3",
+      "licence": "MIT",
+      "licenceFile": "_licenses/golang/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "go"
+      ],
+      "files": {
+        "SKILL.md": "536c25e624c3cf3def98962d9f89db07b258cde6c9e7fd17009a9eb204ba631f",
+        "evals/evals.json": "a7b58b4f717745e606b067c1f65c93db55182b4a561b8ffa43158a7f64515fa7",
+        "references/error-creation.md": "8a5bda5a543ef7774ddc240cd198d34871222ed0335474df599d162f09d253c2",
+        "references/error-handling.md": "ab9c510305a1fe043502a04fe935f16dac2f95c585820ae9f0568afb2a56d357",
+        "references/error-wrapping.md": "6293caf2c41eef243dffbc2dbd17d045770f9a04e8ce910c4452b3d2b6abce06"
+      },
+      "treeSha256": "f152dcab81d6db5c56b6b362864fe25845f8f4a967089a55c2d498b4b2c9e199",
+      "notes": "Install hints use 'go install ...@latest' (metadata and SKILL.md): ignored, repo rules apply (tools/go.mod pinned tools). frontmatter 'paths' and 'allowed-tools' are the skill's own metadata."
+    },
+    "golang-lint": {
+      "origine": "tiers",
+      "source": "samber/cc-skills-golang",
+      "url": "https://github.com/samber/cc-skills-golang",
+      "path": "skills/golang-lint",
+      "sha": "d68d80aec298e1b74b37c2a472c002b5217248b3",
+      "licence": "MIT",
+      "licenceFile": "_licenses/golang/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "go"
+      ],
+      "files": {
+        "SKILL.md": "45e510222626ab4367e7831dcef2560c9c54a7f489ec4219eec89f4fdc4e6930",
+        "assets/.golangci.yml": "ad4284596f57d66bcdbc92687011a4dce1699cc684283eb172cd3dd91047646e",
+        "evals/evals.json": "b075c4894cb663b067b5cfeaf5525ed49af1dffda24b36c458d09c2f40ffb90a",
+        "references/linter-reference.md": "0858adf98ca9cdcd8f614176008a58098a267bdbc4a5de976d7180e8a11e4f18",
+        "references/nolint-directives.md": "be12adeb536e134398243b8cee0433eb27fefabae3f13092b826198c5e461067"
+      },
+      "treeSha256": "b589e39df1b0bacb2890154d5681dad0203b1d38427fa9634156c2ef5d82018c",
+      "notes": "Install hints use 'go install ...@latest' (metadata and SKILL.md): ignored, repo rules apply (tools/go.mod pinned tools). frontmatter 'paths' and 'allowed-tools' are the skill's own metadata."
+    },
+    "golang-testing": {
+      "origine": "tiers",
+      "source": "samber/cc-skills-golang",
+      "url": "https://github.com/samber/cc-skills-golang",
+      "path": "skills/golang-testing",
+      "sha": "d68d80aec298e1b74b37c2a472c002b5217248b3",
+      "licence": "MIT",
+      "licenceFile": "_licenses/golang/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "auto",
+      "audit_level": "full-read",
+      "profils": [
+        "go"
+      ],
+      "files": {
+        "SKILL.md": "55eea3ed4536df0c95fc1247382d3027d45b1d1af0a94fc9de653debae5df0f2",
+        "evals/evals.json": "bc083e8d62ff1c23d9cd734f274a5733cfc0d30bb6356e03668dd3c67ff7c92e",
+        "references/benchmarks.md": "f9de0e2e50cbb8e28684da1f99ff15fa84779150b4a8deefdf97ea3345c871f1",
+        "references/coverage.md": "b2f7af52412b084cf353ff493941ad43276cae9d197470db2287b5d2c5a1aebf",
+        "references/examples.md": "40c070f0a83898edbc0c87c034fc2281d9c2b04e0514c94aa1ff07b802b575c5",
+        "references/helpers.md": "8c71d253a246e66b8249022c96d7e8892f5bfc2156b02a36673c321db2c843f4",
+        "references/http-testing.md": "39381274d7887651b86bde513085835f52860aa0832eb6f945f79c008f240e0f",
+        "references/integration-testing.md": "a29e725c58a1c2feaf16470db7eb4f8394aa36a476df92a792ac026c950d0b85",
+        "references/mocking.md": "65558f907dea483831aea4aca50b1d6f1b64f92803bc2446f6a550a6d6c5c33a"
+      },
+      "treeSha256": "82b421ced62de60620d0eb20f2037055605128e592b3b26a676c06a219fdf0a4",
+      "notes": "Install hints use 'go install ...@latest' (metadata and SKILL.md): ignored, repo rules apply (tools/go.mod pinned tools). frontmatter 'paths' and 'allowed-tools' are the skill's own metadata. Recommends testify: stdlib first applies (CLAUDE.md section 1)."
+    },
+    "humanizer": {
+      "origine": "tiers",
+      "source": "blader/humanizer",
+      "url": "https://github.com/blader/humanizer",
+      "path": ".",
+      "sha": "b48c832f0f809c1b5658edbb838c2521b72f2413",
+      "licence": "MIT",
+      "licenceFile": "_licenses/blader/LICENSE",
+      "auditDate": "2026-11-12",
+      "trigger": "manual",
+      "audit_level": "full-read",
+      "profils": [
+        "copy-fr-en",
+        "docs"
+      ],
+      "files": {
+        "LICENSE": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96",
+        "SKILL.md": "804a119e924ac30295b298213e0b71b3e38b2667b8ef4fb7b69e9246369b9045"
+      },
+      "treeSha256": "3ce27d22220bd0733f4ccc65ed6913dee55b0627741c05356e89b2b6cb34a775",
+      "notes": "Skill is the repo root: only SKILL.md and LICENSE vendored. Not vendored (dev tooling, not part of the skill): scripts/validate-package.py, agents/openai.yaml, .github/, package.json, plugin manifests. Trigger set to manual 2026-11-12: file mode rewrites files; style tool."
+    }
+  }
+}
