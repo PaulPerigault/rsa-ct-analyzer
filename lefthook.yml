@@ -9,7 +9,9 @@ pre-commit:
       run: go tool -modfile=tools/go.mod gitleaks git --pre-commit --staged --redact --no-banner
     format:
       glob: '*.go'
-      run: test -z "$(gofmt -s -l {staged_files})" || { gofmt -s -l {staged_files}; echo "run task fmt"; exit 1; }
+      # Through Task: on Windows Lefthook does not escape the inner double quotes of an inline `sh -c`
+      # (`unexpected EOF`, exit 2 on any staged Go file); Task's embedded shell handles the quoting.
+      run: go tool -modfile=tools/go.mod task fmt:check
     lint:
       glob: '*.go'
       run: go tool -modfile=tools/go.mod golangci-lint run ./...

@@ -9,6 +9,8 @@ vars:
   PKG: github.com/PaulPerigault/rsa-ct-analyzer
   EXE: '{{if eq OS "windows"}}.exe{{end}}'
   TOOL: go tool -modfile=tools/go.mod
+  # Tag AND digest: never `latest`. Refresh both together after reading the release notes.
+  TRIVY_IMAGE: aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
   VERSION:
     sh: git describe --tags --always --dirty 2>/dev/null || echo dev
   COMMIT:
@@ -84,6 +86,11 @@ tasks:
     cmds:
       - go vet ./...
       - '{{.TOOL}} golangci-lint run ./...'
+
+  lint:zizmor:
+    desc: "zizmor 1.32.0 (same version as CI) offline, regular persona, via Docker pinned by digest; not part of verify (needs Docker)"
+    cmds:
+      - docker run --rm -v "{{.ROOT_DIR}}:/w:ro" -w /w ghcr.io/zizmorcore/zizmor@sha256:3014cc8f68f663935f69b3c3e0e41f5ce102b268d97db13db0f62208747f860d --offline --no-progress .github/workflows
 
   fmt:
     desc: Format the Go code
@@ -174,7 +181,7 @@ tasks:
       - mkdir -p .tools
       - docker save {{.BINARY}}:local -o .tools/image.tar
       - >-
-        docker run --rm -v "{{.TASKFILE_DIR}}/.tools:/in" aquasec/trivy:latest
+        docker run --rm -v "{{.TASKFILE_DIR}}/.tools:/in" {{.TRIVY_IMAGE}}
         image --input /in/image.tar --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1
 
   clean:

@@ -17,6 +17,8 @@ concurrency:
 
 jobs:
   scorecard:
+    # Needs a public repository (published results, SARIF upload): skipped while private.
+    if: github.event.repository.private == false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
