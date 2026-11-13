@@ -87,6 +87,11 @@ tasks:
       - go vet ./...
       - '{{.TOOL}} golangci-lint run ./...'
 
+  lint:zizmor:
+    desc: "zizmor 1.32.0 (same version as CI) offline, regular persona, via Docker pinned by digest; not part of verify (needs Docker)"
+    cmds:
+      - docker run --rm -v "{{.ROOT_DIR}}:/w:ro" -w /w ghcr.io/zizmorcore/zizmor@sha256:3014cc8f68f663935f69b3c3e0e41f5ce102b268d97db13db0f62208747f860d --offline --no-progress .github/workflows
+
   fmt:
     desc: Format the Go code
     cmds:
