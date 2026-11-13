@@ -1,6 +1,6 @@
 # https://taskfile.dev — single entry point. `task` lists the targets.
 # Dev tools are pinned in tools/go.mod (hashes in tools/go.sum): nothing is
-# downloaded unverified. Install Task once: `go install github.com/go-task/task/v3/cmd/task@latest`
+# downloaded unverified. Install Task once: `go install github.com/go-task/task/v3/cmd/task@v3.54.0`
 # or use the pinned copy: `go tool -modfile=tools/go.mod task <target>`.
 version: '3'
 
