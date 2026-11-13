@@ -103,7 +103,7 @@ Order of authority: this file, then house skills, then `encre-*`, then third-par
 - One issue per step, created from a form, complete from the start (context, goal, criteria, package, size,
   priority, milestone, out of scope). Bodies of the planned issues are in `.github/backlog/*.md`.
 - PR to `main` with `Closes #n`, squash merge, ruleset in `.github/rulesets/main.json` (required check `ci`).
-- Releases: release-please opens the release PR; the tag triggers `release.yml`.
+- Releases: release-please opens a draft release PR; the owner marks it ready and merges it, the tag triggers `release.yml` ([ADR 0006](docs/adr/0006-release-please-no-release-without-the-owner.md)).
 
 ## Git
 

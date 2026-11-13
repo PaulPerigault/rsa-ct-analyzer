@@ -1,7 +1,8 @@
 name: release-please
 
 # Opens or updates the release PR (CHANGELOG.md, version manifest). Merging that
-# PR creates the tag, which triggers release.yml. Nothing is published here.
+# PR creates the tag, which triggers release.yml. Nothing is published here: the PR is a
+# draft (release-please-config.json), merged by the owner only (ADR 0006).
 on:
   push:
     branches: [main]
