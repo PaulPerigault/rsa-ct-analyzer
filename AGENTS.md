@@ -42,6 +42,7 @@ task skills:verify # project skills match the lock, at most 12 auto-triggered
 task docs:readme  # regenerate the README sample output
 task data:gen     # regenerate testdata/ (task data:check must stay green)
 task docker:build # image; task docker:scan runs Trivy on it
+task lint:zizmor  # workflow audit with the pinned zizmor image (needs Docker, not part of verify)
 ```
 
 Dev tools are pinned in `tools/go.mod` (hashes in `tools/go.sum`) and run with
