@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # Multi-stage build: pure Go (CGO off) binary in a distroless, non-root image.
 
-FROM golang:1.26-alpine AS build
+FROM golang:1.26-alpine@sha256:30b1e546a9c7fa3b747c2bdba3a0c7bdf3a02ebb4c5b8405d2f948d7e8aac4ec AS build
 WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 go build -trimpath \
       -o /out/rsa-ct-analyzer ./cmd/rsa-ct-analyzer \
  && mkdir /out/work && chown 65532:65532 /out/work
 
-FROM gcr.io/distroless/static-debian12:nonroot
+FROM gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab
 LABEL org.opencontainers.image.title="rsa-ct-analyzer" \
       org.opencontainers.image.description="Audit RSA keys from certificates and Certificate Transparency logs" \
       org.opencontainers.image.source="https://github.com/PaulPerigault/rsa-ct-analyzer" \
