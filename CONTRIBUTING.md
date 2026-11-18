@@ -8,9 +8,8 @@ Thanks for looking. This is a small project with a strict method; the rules are 
 ```bash
 git clone https://github.com/PaulPerigault/rsa-ct-analyzer.git
 cd rsa-ct-analyzer
-go install github.com/go-task/task/v3/cmd/task@latest   # or: go tool -modfile=tools/go.mod task
-task setup     # modules, .env, pinned tools check, Git hooks (Lefthook)
-task verify    # everything CI runs
+go tool -modfile=tools/go.mod task setup    # pinned Task, no global install; modules, .env, pinned tools check, Git hooks (Lefthook)
+go tool -modfile=tools/go.mod task verify   # everything CI runs
 ```
 
 Go 1.27 or newer. On Windows, Git for Windows provides the POSIX tools some targets use.
