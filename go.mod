@@ -1,8 +1,8 @@
 module github.com/PaulPerigault/rsa-ct-analyzer
 
-go 1.26
+go 1.27
 
-toolchain go1.26.11
+toolchain go1.27.4
 
 require github.com/spf13/cobra v1.10.2
 

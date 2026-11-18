@@ -4,7 +4,7 @@ Find weak RSA keys in X.509 certificates and Certificate Transparency logs: smal
 
 [![CI](https://github.com/PaulPerigault/rsa-ct-analyzer/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/PaulPerigault/rsa-ct-analyzer/actions/workflows/ci.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/PaulPerigault/rsa-ct-analyzer/badge)](https://scorecard.dev/viewer/?uri=github.com/PaulPerigault/rsa-ct-analyzer)
-[![Go](https://img.shields.io/badge/go-1.26-00ADD8?logo=go&logoColor=white)](go.mod)
+[![Go](https://img.shields.io/badge/go-1.27-00ADD8?logo=go&logoColor=white)](go.mod)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 I maintain this alone. The rules of the repository are written once in [AGENTS.md](AGENTS.md) and checked in CI; decisions are in [docs/adr/](docs/adr/) and [docs/decisions-log.md](docs/decisions-log.md).
@@ -72,7 +72,7 @@ graph TD
 
 ## Quick Start
 
-Prerequisites: Go 1.26+ and [Task](https://taskfile.dev) (`go install github.com/go-task/task/v3/cmd/task@latest`, or run the pinned copy with `go tool -modfile=tools/go.mod task`). Docker is optional.
+Prerequisites: Go 1.27+ and [Task](https://taskfile.dev) (`go install github.com/go-task/task/v3/cmd/task@latest`, or run the pinned copy with `go tool -modfile=tools/go.mod task`). Docker is optional.
 
 ```bash
 git clone https://github.com/PaulPerigault/rsa-ct-analyzer.git

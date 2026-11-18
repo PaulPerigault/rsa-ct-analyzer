@@ -13,7 +13,7 @@ task setup     # modules, .env, pinned tools check, Git hooks (Lefthook)
 task verify    # everything CI runs
 ```
 
-Go 1.26 or newer. On Windows, Git for Windows provides the POSIX tools some targets use.
+Go 1.27 or newer. On Windows, Git for Windows provides the POSIX tools some targets use.
 
 ## Workflow
 

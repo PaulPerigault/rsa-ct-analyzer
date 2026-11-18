@@ -1,6 +1,6 @@
 module github.com/PaulPerigault/rsa-ct-analyzer/tools
 
-go 1.26.4
+go 1.27
 
 tool (
 	github.com/evilmartians/lefthook

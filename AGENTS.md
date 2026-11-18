@@ -7,7 +7,7 @@ this file, then the project skills, then third-party skills. A skill is method, 
 
 `rsa-ct-analyzer` is a Go CLI that audits RSA keys: undersized moduli, bad public exponents, trivially
 factorable keys, duplicated keys and primes shared between keys (batch GCD). Inputs are local PEM/DER
-files or a Certificate Transparency log (RFC 6962). Go 1.26, one runtime dependency (`cobra`), CGO off, MIT.
+files or a Certificate Transparency log (RFC 6962). Go 1.27, one runtime dependency (`cobra`), CGO off, MIT.
 Owner: Paul Perigault (paulperigault.fr). The web playground (v0.2.0) will consume `@paulperigault/design-system`.
 
 | Path | Role | May import |
