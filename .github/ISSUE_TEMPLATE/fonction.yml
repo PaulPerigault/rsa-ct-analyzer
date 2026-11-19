@@ -80,5 +80,5 @@ body:
           required: true
         - label: Documentation up to date (README, ADR or journal).
           required: true
-        - label: PR linked with `Closes #n`.
+        - label: "PR linked with `Closes #n`."
           required: true
