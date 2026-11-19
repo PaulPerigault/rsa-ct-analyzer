@@ -37,7 +37,7 @@ body:
     id: children
     attributes:
       label: Sub-issues
-      description: One checkbox per sub-issue, `- [ ] #n title`.
+      description: "One checkbox per sub-issue, `- [ ] #n title`."
       value: |
         - [ ]
   - type: dropdown
@@ -87,5 +87,5 @@ body:
           required: true
         - label: Documentation up to date (README, ADR or journal).
           required: true
-        - label: PR linked with `Closes #n`.
+        - label: "PR linked with `Closes #n`."
           required: true
